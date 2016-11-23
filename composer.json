@@ -1,5 +1,5 @@
 {
-    "name": "Soapbox/conditionalfields",
+    "name": "soapbox/conditionalfields",
     "description": "An extension to add a condition parameter to contenttypes.yml and taxonomy.yml.",
     "type": "bolt-extension",
     "keywords": [
