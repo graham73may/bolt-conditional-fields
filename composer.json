@@ -1,0 +1,45 @@
+{
+    "name": "Soapbox/conditionalfields",
+    "description": "An extension to add a condition parameter to contenttypes.yml and taxonomy.yml.",
+    "type": "bolt-extension",
+    "keywords": [
+        "conditional fields",
+        "conditional",
+        "conditions",
+        "fields"
+    ],
+    "require": {
+        "bolt/bolt": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Graham May",
+            "email": "graham.may@soapbox.co.uk"
+        }, 
+        {
+        	"name": "Robert Hunt",
+            "email": "robert.hunt@soapbox.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Bolt\\Extension\\Soapbox\\ConditionalFields\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bolt\\Extension\\Soapbox\\ConditionalFields\\Tests\\": "tests",
+            "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
+        }
+    },
+    "extra": {
+        "bolt-assets": "web",
+        "bolt-class": "Bolt\\Extension\\Soapbox\\ConditionalFields\\ConditionalFieldsExtension"
+    }
+}
