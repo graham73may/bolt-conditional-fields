@@ -1,3 +1,5 @@
+.idea
+.idea/*
 .DS_*
 config.yml
 composer.lock

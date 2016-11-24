@@ -17,6 +17,17 @@ class ConditionalFieldsExtension extends SimpleExtension
 {
 
     /**
+     * Pretty extension name
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+
+        return 'Conditional Fields';
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function registerAssets()
