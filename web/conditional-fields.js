@@ -64,7 +64,7 @@
                         if (allRepeaterFields[field]['condition'].hasOwnProperty('field')) {
                             fieldName = allRepeaterFields[field]['condition']['field'];
 
-                            regexPattern = 'ft_content_cards\\[\\d+\]\\[type_of_content\\]';
+                            regexPattern = new RegExp(name + '\\[\\d+\\]\\[' + fieldName + '\\]');
 
                             if (repeaterFieldsToWatch.indexOf(regexPattern) === -1) {
                                 // Fields to watch the value change of
