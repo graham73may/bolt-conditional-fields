@@ -66,7 +66,7 @@
 
                             regexPattern = new RegExp(name + '\\[\\d+\\]\\[' + fieldName + '\\]');
 
-                            if (repeaterFieldsToWatch.indexOf(regexPattern) === -1) {
+                            if (repeaterFieldsToWatch.indexOf(regexPattern.toString()) === -1) {
                                 // Fields to watch the value change of
                                 repeaterFieldsToWatch.push(regexPattern);
                             }
