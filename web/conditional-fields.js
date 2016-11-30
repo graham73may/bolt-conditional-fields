@@ -64,11 +64,9 @@
                         if (allRepeaterFields[field]['condition'].hasOwnProperty('field')) {
                             fieldName = allRepeaterFields[field]['condition']['field'];
 
-                            regexPattern = new RegExp(name + '\\[\\d+\\]\\[' + fieldName + '\\]');
-
-                            if (repeaterFieldsToWatch.indexOf(regexPattern.toString()) === -1) {
+                            if (repeaterFieldsToWatch.indexOf(name + '\\[\\d+\\]\\[' + fieldName + '\\]') === -1) {
                                 // Fields to watch the value change of
-                                repeaterFieldsToWatch.push(regexPattern);
+                                repeaterFieldsToWatch.push(name + '\\[\\d+\\]\\[' + fieldName + '\\]');
                             }
 
                             repeaterToAdd = allRepeaterFields[field];
@@ -77,7 +75,6 @@
                             repeaterToAdd['repeater'] = name;
 
                             // Add this field to the repeaterFields array
-                            //repeaterFields[name + ':' + field] = repeaterToAdd;
                             repeaterFields[field] = repeaterToAdd;
                         }
                     }
