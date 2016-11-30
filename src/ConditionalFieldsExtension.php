@@ -46,11 +46,13 @@ class ConditionalFieldsExtension extends SimpleExtension
               ->setZone(Zone::BACKEND)
               ->setLate(true);
 
-        $content_types_snippet = (new Snippet())->setCallback('<script>var contentTypes = JSON.parse(\'' . str_replace('\\\\', '\\', json_encode($content_types)) . '\');</script>')
+        $content_types_snippet = (new Snippet())->setCallback('<script>var contentTypes = JSON.parse(\'' . str_replace('\\\\', '\\',
+                json_encode($content_types, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)) . '\');</script>')
                                                 ->setZone(Zone::BACKEND)
                                                 ->setLocation(Target::BEFORE_HEAD_JS);
 
-        $taxonomies_snippet = (new Snippet())->setCallback('<script>var taxonomies = JSON.parse(\'' . str_replace('\\\\', '\\', json_encode($taxonomies)) . '\');</script>')
+        $taxonomies_snippet = (new Snippet())->setCallback('<script>var taxonomies = JSON.parse(\'' . str_replace('\\\\', '\\',
+                json_encode($taxonomies, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)) . '\');</script>')
                                              ->setZone(Zone::BACKEND)
                                              ->setLocation(Target::BEFORE_HEAD_JS);
 
