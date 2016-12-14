@@ -326,6 +326,11 @@
                 // Check if the value matches
                 var conditionMatched = false;
 
+                // Check if field's value is null (e.g. this occurs for images)
+                if (watchedValue === null) {
+                    watchedValue = '';
+                }
+
                 if (typeof watchedValue === 'object') {
                     var i   = 0;
                     var len = watchedValue.length;
