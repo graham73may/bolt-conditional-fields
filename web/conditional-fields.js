@@ -196,6 +196,7 @@
                             $field = $('#taxonomy-' + name);
 
                             break;
+                        case 'checkbox':
                         case 'filelist':
                         case 'textarea':
                             $field = $('[name=' + name + ']');
