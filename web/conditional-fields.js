@@ -357,7 +357,7 @@
 
     function initTemplatefieldFields () {
         // Check templatefields for condition config to see what relationships need to be checked
-        if ($templateSelect.val().length) {
+        if ($templateSelect.length && $templateSelect.val().length) {
             var selectedTemplate = $templateSelect.val();
 
             if (templateFields.hasOwnProperty(selectedTemplate)) {
