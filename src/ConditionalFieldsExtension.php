@@ -40,6 +40,14 @@ class ConditionalFieldsExtension extends SimpleExtension
         $content_types = $app['config']->get('contenttypes');
         $taxonomies    = $app['config']->get('taxonomy');
 
+        // Template Fields
+        $theme           = $app['config']->get('theme');
+        $template_fields = '';
+
+        if (!empty($theme['templatefields'])) {
+            $template_fields = $theme['templatefields'];
+        }
+
         $asset = new JavaScript();
 
         $asset->setFileName('conditional-fields.js')
@@ -56,9 +64,15 @@ class ConditionalFieldsExtension extends SimpleExtension
                                              ->setZone(Zone::BACKEND)
                                              ->setLocation(Target::BEFORE_HEAD_JS);
 
+        $template_fields_snippet = (new Snippet())->setCallback('<script>var templateFields = JSON.parse(\'' . str_replace('\\\\', '\\',
+                json_encode($template_fields, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)) . '\');</script>')
+                                                  ->setZone(Zone::BACKEND)
+                                                  ->setLocation(Target::BEFORE_HEAD_JS);
+
         return [
             $taxonomies_snippet,
             $content_types_snippet,
+            $template_fields_snippet,
             $asset
         ];
     }
