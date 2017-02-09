@@ -53,6 +53,7 @@
             var i;
             var len = fieldsToWatch.length;
             var $fieldToWatch;
+            var watchName;
             var watchVal;
 
             // Check conditional fields
@@ -65,13 +66,15 @@
                     $fieldToWatch = $('[name=' + fieldsToWatch[i] + ']');
                 }
 
-                watchVal = $fieldToWatch.val();
+                watchName = $fieldToWatch.attr('id');
+                watchVal  = $fieldToWatch.val();
 
                 if ($fieldToWatch.is('input[type="checkbox"]') && !$fieldToWatch.is(':checked')) {
-                    watchVal = '0';
+                    watchName = $fieldToWatch.attr('name');
+                    watchVal  = '0';
                 }
 
-                checkConditionalFields($fieldToWatch.attr('id'), watchVal);
+                checkConditionalFields(watchName, watchVal);
             }
 
             // Check conditional fields inside repeaters
