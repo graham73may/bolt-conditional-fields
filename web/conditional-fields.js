@@ -69,9 +69,12 @@
                 watchName = $fieldToWatch.attr('id');
                 watchVal  = $fieldToWatch.val();
 
-                if ($fieldToWatch.is('input[type="checkbox"]') && !$fieldToWatch.is(':checked')) {
+                if ($fieldToWatch.is('input[type="checkbox"]')) {
                     watchName = $fieldToWatch.attr('name');
-                    watchVal  = '0';
+                }
+
+                if ($fieldToWatch.is('input[type="checkbox"]') && !$fieldToWatch.is(':checked')) {
+                    watchVal = '0';
                 }
 
                 checkConditionalFields(watchName, watchVal);
