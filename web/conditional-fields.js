@@ -104,7 +104,7 @@
                 if (conditionalFields[name].hasOwnProperty('type')) {
                     switch (conditionalFields[name]['type']) {
                         case 'repeater':
-                            $field = $('[name*="' + name + '[0]"]');
+                            $field = $('[name="' + name + '[]"]');
 
                             break;
                         case 'relation':
