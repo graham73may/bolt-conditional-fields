@@ -452,7 +452,7 @@
 
             // Check which of these are display none (can't use hidden because inactive tabs return as hidden)
             $fields = $fields.filter(function () {
-                return $(this).css("display") !== "none"
+                return $(this).data('bolt-fieldset').length && $(this).css("display") !== "none"
             });
 
             // Show / Hide the tab if it has visible contents
