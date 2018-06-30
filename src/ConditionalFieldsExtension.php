@@ -1,4 +1,5 @@
 <?php
+
 namespace Bolt\Extension\Soapbox\ConditionalFields;
 
 use Bolt\Asset\File\JavaScript;
@@ -48,24 +49,28 @@ class ConditionalFieldsExtension extends SimpleExtension
             $template_fields = $theme['templatefields'];
         }
 
+        // Load the conditional fields javascript file
         $asset = new JavaScript();
 
         $asset->setFileName('conditional-fields.js')
               ->setZone(Zone::BACKEND)
               ->setLate(true);
 
-        $content_types_snippet = (new Snippet())->setCallback('<script>var contentTypes = JSON.parse(\'' . str_replace('\\\\', '\\',
-                json_encode($content_types, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)) . '\');</script>')
+        // Content Types
+        $content_types_json    = $this->sanitiseJsonString($content_types);
+        $content_types_snippet = (new Snippet())->setCallback('<script>var contentTypes = JSON.parse(\'' . $content_types_json . '\');</script>')
                                                 ->setZone(Zone::BACKEND)
                                                 ->setLocation(Target::BEFORE_HEAD_JS);
 
-        $taxonomies_snippet = (new Snippet())->setCallback('<script>var taxonomies = JSON.parse(\'' . str_replace('\\\\', '\\',
-                json_encode($taxonomies, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)) . '\');</script>')
+        // Taxonomies
+        $taxonomies_json    = $this->sanitiseJsonString($taxonomies);
+        $taxonomies_snippet = (new Snippet())->setCallback('<script>var taxonomies = JSON.parse(\'' . $taxonomies_json . '\');</script>')
                                              ->setZone(Zone::BACKEND)
                                              ->setLocation(Target::BEFORE_HEAD_JS);
 
-        $template_fields_snippet = (new Snippet())->setCallback('<script>var templateFields = JSON.parse(\'' . str_replace('\\\\', '\\',
-                json_encode($template_fields, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)) . '\');</script>')
+        // Template Fields
+        $template_fields_json    = $this->sanitiseJsonString($template_fields);
+        $template_fields_snippet = (new Snippet())->setCallback('<script>var templateFields = JSON.parse(\'' . $template_fields_json . '\');</script>')
                                                   ->setZone(Zone::BACKEND)
                                                   ->setLocation(Target::BEFORE_HEAD_JS);
 
@@ -75,5 +80,17 @@ class ConditionalFieldsExtension extends SimpleExtension
             $template_fields_snippet,
             $asset
         ];
+    }
+
+    private function sanitiseJsonString($encode_me)
+    {
+
+        // Convert array to JSON
+        $json = str_replace('\\\\', '\\', json_encode($encode_me, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+
+        // Remove string line breaks that are parsed in to actual line breaks by JSON.parse()
+        $json = str_replace("\\n", "", $json);
+
+        return $json;
     }
 }
