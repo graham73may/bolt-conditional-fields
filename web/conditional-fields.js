@@ -129,6 +129,10 @@
                             $field = $('[name*="' + name + '[address]"]');
 
                             break;
+                        case 'video':
+                            $field = $('[name*="' + name + '[url]"]');
+
+                            break;
                         default:
                             $field = $('#' + name);
 
