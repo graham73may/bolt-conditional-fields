@@ -122,6 +122,7 @@
 
                             break;
                         case 'image':
+                        case 'file':
                             $field = $('#field-' + name);
 
                             break;
